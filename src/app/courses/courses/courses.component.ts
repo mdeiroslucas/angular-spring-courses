@@ -1,26 +1,26 @@
 import { Component, OnInit } from '@angular/core';
 
 import { Course } from '../model/course';
-
+import { CoursesService } from '../services/courses.service';
 
 @Component({
   selector: 'app-courses',
   templateUrl: './courses.component.html',
-  styleUrls: ['./courses.component.scss']
+  styleUrls: ['./courses.component.scss'],
 })
 export class CoursesComponent implements OnInit {
 
-  public displayedColumns: Array<string> = [];
+  displayedColumns: Array<string> = ['name', 'category'];
+  courses: Course[];
 
-  courses: Course[] = [
-     { _id: "1", name: "Angular", category: "front-end"}
-  ];
-
-  constructor() {}
-
-  ngOnInit(): void {
-
-    this.displayedColumns = [ 'name', 'category'];
+  constructor(
+    private coursesService: CoursesService
+    // private courses?: Array<Course>
+  ) {
+    this.courses = this.coursesService.getAll();
   }
 
+  ngOnInit(): void {
+    this.courses = this.coursesService.getAll();
+  }
 }
