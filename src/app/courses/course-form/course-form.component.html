@@ -1,33 +1,27 @@
-<!-- <div class="form">
-    <h2 class="form--title">Registration Course</h2>
-    <form [formGroup]="form">
-        <div [formGroupName]="name">
-            <label for="courseName">Course Name</label>
-            <input type="text" id="courseName" 
-            placeholder="Insert the name of the course"
-            formControlName="courseName"
-            >
-
-        </div>
-    </form>
-</div> -->
-
 <mat-card>
   <mat-card-content>
     <mat-toolbar color="primary">Informações do Curso</mat-toolbar>
+
     <form action="" [formGroup]="form">
       <mat-form-field appearance="legacy" class="full-width">
         <mat-label>Nome</mat-label>
-        <input matInput placeholder="Nome" />
+        <input matInput placeholder="Nome" formControlName="name"/>
       </mat-form-field>
 
-      <mat-form-field appearance="legacy" class="full-width">
+      <mat-form-field class="full-width">
         <mat-label>Categoria</mat-label>
-        <input matInput placeholder="Categoria" />
+        <mat-select matNativeControl required formControlName="category">
+          <mat-option value="null"></mat-option>
+          <mat-option value="front-end">Front-End</mat-option>
+          <mat-option value="back-edn">Back-End</mat-option>
+        </mat-select>
       </mat-form-field>
     </form>
+
     <mat-card-actions>
-      <button mat-raised-button color="primary" (click)="onSubmit()">Salvar</button>
+      <button mat-raised-button color="primary" (click)="onSubmit()">
+        Salvar
+      </button>
       <button mat-raised-button (click)="onCancel()">Cancelar</button>
     </mat-card-actions>
   </mat-card-content>
