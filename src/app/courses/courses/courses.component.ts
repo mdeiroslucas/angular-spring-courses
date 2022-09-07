@@ -14,7 +14,7 @@ import { CoursesService } from '../services/courses.service';
 })
 export class CoursesComponent implements OnInit {
 
-  displayedColumns: Array<string> = ['name', 'category', 'actions'];
+  
   courses$: Observable<Array<Course>>;
 
   constructor(
@@ -45,4 +45,5 @@ export class CoursesComponent implements OnInit {
 
   ngOnInit(): void {
   }
+
 }

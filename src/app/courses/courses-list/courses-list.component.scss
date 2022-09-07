@@ -1,0 +1,8 @@
+.mat-table {
+    overflow: auto;
+    max-height: 37.5em;
+
+    .action__column {
+        flex: 0 0 4.7em;
+    }
+}

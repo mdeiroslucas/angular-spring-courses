@@ -30,15 +30,15 @@ export class CourseFormComponent implements OnInit {
   
   }
   
-  onSubmit(){
+  onSubmit(): void {
     this.coursesService.save(this.form.value).subscribe({next: (n) => this.onSuccess() , error: (e) => this.onError()})
   }
   
-  onCancel(){
+  onCancel(): void {
     this.location.back();
   }
 
-  private onSuccess(){
+  private onSuccess(): void {
     this.snackBar.open("Curso salvo com sucesso", '', {duration: 5000});
     this.onCancel();
   }
