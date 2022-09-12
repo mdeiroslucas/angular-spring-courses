@@ -27,7 +27,7 @@
       <!-- pra cara registro, eu vou fazer alguma coisa com esse registro, é o que significa o let course. -->
       <mat-cell *matCellDef="let course" class="action__column">
         <button mat-icon-button color="primary" aria-label="Example icon button with a menu icon">
-          <mat-icon aria-label="add button">edit</mat-icon> 
+          <mat-icon  (click)="onEdit(course)" aria-label="add button">edit</mat-icon> 
         </button>
         <button mat-icon-button color="warn" aria-label="Example icon button with a menu icon">
           <mat-icon aria-label="add button">delete</mat-icon> 

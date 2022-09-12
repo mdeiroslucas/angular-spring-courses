@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable, take, tap } from 'rxjs';
+import { first, Observable, take, tap } from 'rxjs';
 
 import { Course } from '../model/course';
 
@@ -12,15 +12,31 @@ export class CoursesService {
 
   constructor(private httpCliente: HttpClient) {}
 
-  getAll() {
+  getAll(): Observable<Course[]> {
     return this.httpCliente.get<Array<Course>>(this.API).pipe(
       take(1), //pode ser: first(),
       // delay(2000),
       tap((courses) => console.log(courses))
-    );
+      );
+  }
+
+  loadById(id: string) {
+    return this.httpCliente.get<Course>(`${this.API}/${id}`);
   }
 
   save(course: Course): Observable<Course> {
-    return this.httpCliente.post<Course>(this.API, course);
+    if(course._id){
+      return this.update(course);
+    }
+    return this.create(course);
+  }
+  
+  private create(course: Course) {
+    return this.httpCliente.post<Course>(this.API, course).pipe(first());
+  }
+  
+  private update(course: Course) {
+    return this.httpCliente.put<Course>(`${this.API}/${course._id}`, course).pipe(first());
+
   }
 }

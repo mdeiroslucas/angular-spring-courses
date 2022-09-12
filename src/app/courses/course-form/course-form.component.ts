@@ -1,7 +1,10 @@
+import { Location } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
-import { FormControl, FormGroup,  Validators } from '@angular/forms';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { Location } from '@angular/common'
+import { ActivatedRoute } from '@angular/router';
+import { Course } from '../model/course';
+
 import { CoursesService } from '../services/courses.service';
 
 @Component({
@@ -17,21 +20,29 @@ export class CourseFormComponent implements OnInit {
   constructor(
     private coursesService: CoursesService,
     private snackBar: MatSnackBar,
-    private location: Location
+    private location: Location,
+    private activatedRoute: ActivatedRoute
   ) { 
    
   }
   
   ngOnInit(): void {
     this.form = new FormGroup({
+      _id: new FormControl(""),
       name: new FormControl('', [Validators.required]),
       category: new FormControl('', [Validators.required])
     });
-  
+
+    const course: Course = this.activatedRoute.snapshot.data["course"];
+    this.form.setValue({
+      id: course._id,
+      name: course.name,
+      category: course.category
+    });
   }
   
   onSubmit(): void {
-    this.coursesService.save(this.form.value).subscribe({next: (n) => this.onSuccess() , error: (e) => this.onError()})
+    this.coursesService.save(this.form.value).subscribe({next: (n) => this.onSuccess() , error: (e) => this.onError()});
   }
   
   onCancel(): void {
